@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Payment.API.Database;
 
 namespace Payment.API.Extensions
@@ -10,10 +10,11 @@ namespace Payment.API.Extensions
         IConfiguration configuration)
         {
             string connectionString = configuration.GetConnectionString("Database");
-            services.AddDbContext<ApplicationDbContext>( options => 
-                options.UseNpgsql(connectionString)
-                       .ConfigureWarnings(w => w.Ignore(RelationalEventId.PendingModelChangesWarning)) 
-            );
+
+            services.AddDbContext<ApplicationDbContext>(
+            options => options
+                .UseNpgsql(connectionString, npgsqlOptions => npgsqlOptions.MigrationsHistoryTable(HistoryRepository.DefaultTableName, "public"))
+                .UseSnakeCaseNamingConvention());
 
             return services;
         }

@@ -17,100 +17,73 @@ namespace Payment.API.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("public")
                 .HasAnnotation("ProductVersion", "9.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Payment.API.Entities.Payments", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric")
+                        .HasColumnName("amount");
+
+                    b.Property<string>("Concept")
+                        .HasColumnType("text")
+                        .HasColumnName("concept");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created");
+
+                    b.Property<int>("IsActive")
+                        .HasColumnType("integer")
+                        .HasColumnName("is_active");
+
+                    b.Property<int>("ProductsNumber")
+                        .HasColumnType("integer")
+                        .HasColumnName("products_number");
+
+                    b.Property<Guid>("StatusId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("status_id");
+
+                    b.Property<DateTime>("Updated")
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated");
+
+                    b.HasKey("Id")
+                        .HasName("pk_payment");
+
+                    b.ToTable("payment", "public");
+                });
+
             modelBuilder.Entity("Payment.API.Entities.Status", b =>
-            {
-                b.Property<Guid>("Id")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("uuid")
-                    .HasColumnName("id");
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
-                b.Property<string>("Description")
-                    .IsRequired()
-                    .HasColumnType("text")
-                    .HasColumnName("description");
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
 
-                b.Property<DateTime>("Created")
-                    .HasColumnType("timestamp with time zone")
-                    .HasColumnName("created");
+                    b.Property<string>("Prefix")
+                        .HasColumnType("text")
+                        .HasColumnName("prefix");
 
-                b.Property<DateTime>("Updated")
-                   .HasColumnType("timestamp with time zone")
-                   .HasColumnName("updated");
+                    b.HasKey("Id")
+                        .HasName("pk_status");
 
-                b.Property<int>("IsActive")
-                   .HasColumnType("integer")
-                   .HasColumnName("is_active");
-
-
-                b.HasKey("Id")
-                    .HasName("pk_status");
-
-                b.ToTable("status", "public");
-            });
-
-            modelBuilder.Entity("Payment.API.Entities.Payments", b =>
-            {
-                b.Property<Guid>("Id")
-                    .ValueGeneratedOnAdd()
-                    .HasColumnType("uuid")
-                    .HasColumnName("id");
-
-                b.Property<string>("Concept")
-                    .IsRequired()
-                    .HasColumnType("text")
-                    .HasColumnName("concept");
-
-                b.Property<decimal>("Amount")
-                    .HasColumnType("decimal(18,2)")
-                    .HasColumnName("amount");
-
-                b.Property<int>("ProductsNumber")
-                    .HasColumnType("integer")
-                    .HasColumnName("products_number");
-
-                b.Property<Guid>("StatusId")
-                    .HasColumnType("uuid")
-                    .HasColumnName("status_id");
-
-                b.Property<DateTime>("Created")
-                    .HasColumnType("timestamp with time zone")
-                    .HasColumnName("created");
-
-                b.Property<DateTime>("Updated")
-                   .HasColumnType("timestamp with time zone")
-                   .HasColumnName("updated");
-
-                b.Property<int>("IsActive")
-                   .HasColumnType("integer")
-                   .HasColumnName("is_active");
-
-
-
-                b.HasKey("Id")
-                    .HasName("pk_payment");
-
-                b.HasIndex("StatusId")
-                    .HasDatabaseName("ix_payment_status");
-
-                b.ToTable("payment", "public");
-            });
-
-
-
-            modelBuilder.Entity("Payment.API.Entities.Payments", b =>
-            {
-                b.HasOne("Payment.API.Entities.Status", null)
-                    .WithMany()
-                    .HasForeignKey("StatusId")
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .IsRequired()
-                    .HasConstraintName("fk_payment_status");
-            });
+                    b.ToTable("status", "public");
+                });
 #pragma warning restore 612, 618
         }
     }

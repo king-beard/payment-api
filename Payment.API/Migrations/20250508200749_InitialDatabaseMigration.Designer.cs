@@ -12,7 +12,7 @@ using Payment.API.Database;
 namespace Payment.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250508161806_InitialDatabaseMigration")]
+    [Migration("20250508200749_InitialDatabaseMigration")]
     partial class InitialDatabaseMigration
     {
         /// <inheritdoc />
@@ -20,6 +20,7 @@ namespace Payment.API.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasDefaultSchema("public")
                 .HasAnnotation("ProductVersion", "9.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
@@ -29,52 +30,62 @@ namespace Payment.API.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<decimal>("Amount")
-                        .HasColumnType("numeric");
-
-                    b.Property<Guid>("ClientId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("numeric")
+                        .HasColumnName("amount");
 
                     b.Property<string>("Concept")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("concept");
 
                     b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("created");
 
                     b.Property<int>("IsActive")
-                        .HasColumnType("integer");
+                        .HasColumnType("integer")
+                        .HasColumnName("is_active");
 
                     b.Property<int>("ProductsNumber")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid>("ShopId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("integer")
+                        .HasColumnName("products_number");
 
                     b.Property<Guid>("StatusId")
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("status_id");
 
                     b.Property<DateTime>("Updated")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp with time zone")
+                        .HasColumnName("updated");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id")
+                        .HasName("pk_payment");
 
-                    b.ToTable("Payment");
+                    b.ToTable("payment", "public");
                 });
 
             modelBuilder.Entity("Payment.API.Entities.Status", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
 
                     b.Property<string>("Description")
-                        .HasColumnType("text");
+                        .HasColumnType("text")
+                        .HasColumnName("description");
 
-                    b.HasKey("Id");
+                    b.Property<string>("Prefix")
+                        .HasColumnType("text")
+                        .HasColumnName("prefix");
 
-                    b.ToTable("Status");
+                    b.HasKey("Id")
+                        .HasName("pk_status");
+
+                    b.ToTable("status", "public");
                 });
 #pragma warning restore 612, 618
         }

@@ -2,8 +2,8 @@
 {
     public class Audit
     {
-        public DateTime Created { get; set; } = DateTime.Now;
-        public DateTime Updated { get; set; } = DateTime.Now;
+        public DateTime Created { get; set; } = DateTime.UtcNow;
+        public DateTime Updated { get; set; } = DateTime.UtcNow;
         public int IsActive { get; set; } = 1;
     }
 }
