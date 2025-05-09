@@ -8,7 +8,8 @@
       "launchUrl": "swagger",
       "applicationUrl": "http://localhost:5082",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_CONNECTION_STRING": "Host=localhost;Port=5438;Database=base_bank;Username=postgres;Password=postgres;Include Error Detail=true"
       }
     },
     "https": {
@@ -18,7 +19,8 @@
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:7051;http://localhost:5082",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ASPNETCORE_CONNECTION_STRING": "Host=localhost;Port=5438;Database=base_bank;Username=postgres;Password=postgres;Include Error Detail=true"
       }
     }
   }

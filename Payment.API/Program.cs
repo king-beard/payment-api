@@ -24,10 +24,11 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwaggerWithUi();
-    app.ApplyMigrations();
 }
 
-app.UseHttpsRedirection();
+app.ApplyMigrations();
+
+//app.UseHttpsRedirection();
 app.UseHealthChecks();
 app.MapCarter();
 

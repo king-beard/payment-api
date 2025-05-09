@@ -9,7 +9,8 @@ namespace Payment.API.Extensions
         public static IServiceCollection AddSQLDatabaseConfiguration(this IServiceCollection services,
         IConfiguration configuration)
         {
-            string connectionString = configuration.GetConnectionString("Database");
+
+            string connectionString = Environment.GetEnvironmentVariable("ASPNETCORE_CONNECTION_STRING");
 
             services.AddDbContext<ApplicationDbContext>(
             options => options
