@@ -1,0 +1,37 @@
+services:
+  webapi:
+    image: webapi
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:80"
+    environment:
+      - ASPNETCORE_CONNECTION_STRING=Host=postgresdb;Port=5432;Database=base_bank;Username=postgres;Password=postgres_password
+    depends_on:
+      - postgresdb
+    restart: 
+      always
+
+  postgresdb:
+    image: postgres
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres_password
+      POSTGRES_DB: base_bank
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  pgadmin:
+    image: "dpage/pgadmin4"
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "pgadmin@codepruner.com"
+      PGADMIN_DEFAULT_PASSWORD: "pgadminP@ssw0rd!"
+
+volumes:
+  pgdata:
