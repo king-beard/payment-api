@@ -6,8 +6,8 @@
         public string Concept { get; set; }
         public decimal Amount { get; set; }
         public int ProductsNumber { get; set; }
+        public Guid ClientId { get; set; }
+        public Guid ShopId { get; set; }
         public Guid StatusId { get; set; }
-        //public Guid ClientId { get; set; }
-        //public Guid ShopId { get; set; }
     }
 }

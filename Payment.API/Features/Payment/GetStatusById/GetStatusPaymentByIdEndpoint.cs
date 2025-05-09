@@ -1,5 +1,7 @@
 ﻿using Carter;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Payment.API.Extensions;
 
 namespace Payment.API.Features.Payment.GetStatusById
@@ -11,7 +13,7 @@ namespace Payment.API.Features.Payment.GetStatusById
     {
         public void AddRoutes(IEndpointRouteBuilder app)
         {
-            app.MapGet("api/payment/{id}/status", async (Guid id, ISender sender) =>
+            app.MapGet("api/payment/{id}/status", [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)] async (Guid id, ISender sender) =>
             {
 
                 var result = await sender.Send(new GetStatusPaymentByIdQuery(id));

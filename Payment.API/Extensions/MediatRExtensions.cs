@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using Payment.API.Behaviors;
+using System.Reflection;
 
 namespace Payment.API.Extensions
 {
@@ -10,7 +11,7 @@ namespace Payment.API.Extensions
             services.AddMediatR(config =>
             {
                 config.RegisterServicesFromAssembly(assembly);
-                //config.AddOpenBehavior(typeof(ValidationBehavior<,>));
+                config.AddOpenBehavior(typeof(ValidationBehavior<,>));
                 //config.AddOpenBehavior(typeof(LoggingBehavior<,>));
             });
 

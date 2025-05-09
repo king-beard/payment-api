@@ -1,5 +1,7 @@
 ﻿using Carter;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Payment.API.Extensions;
 
 namespace Payment.API.Features.Payment.Create
@@ -8,6 +10,8 @@ namespace Payment.API.Features.Payment.Create
     string Concept,
     decimal Amount,
     int ProductsNumber,
+    Guid ClientId,
+    Guid ShopId,
     Guid StatusId
     );
     public sealed record CreatePaymentResponse(Guid Id);
@@ -16,12 +20,14 @@ namespace Payment.API.Features.Payment.Create
     {
         public void AddRoutes(IEndpointRouteBuilder app)
         {
-            app.MapPost("api/payment", async (CreatePaymentRequest request, ISender sender) =>
+            app.MapPost("api/payment", [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)] async (CreatePaymentRequest request, ISender sender) =>
             {
                 var command = new CreatePaymentCommand(
                     request.Concept,
                     request.Amount,
                     request.ProductsNumber,
+                    request.ClientId,
+                    request.ShopId,
                     request.StatusId);
 
                 var result = await sender.Send(command);

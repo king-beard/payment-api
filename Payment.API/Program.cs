@@ -1,4 +1,6 @@
 using Carter;
+using FluentValidation;
+using Payment.API.Exceptions;
 using Payment.API.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,10 +15,14 @@ services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
 
 services
+    .AddAuthorization()
+    .AddServiceAutenticacion(configuration)
     .AddCarter()
     .AddHealthChecksConfiguration()
     .AddMediatRConfiguration(assembly)
-    .AddSQLDatabaseConfiguration(configuration);
+    .AddSQLDatabaseConfiguration(configuration)
+    .AddValidatorsFromAssembly(assembly)
+    .AddExceptionHandler<GlobalExceptionHandler>();
 
 var app = builder.Build();
 
@@ -27,6 +33,9 @@ if (app.Environment.IsDevelopment())
 }
 
 // app.ApplyMigrations();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 //app.UseHttpsRedirection();
 app.UseHealthChecks();
