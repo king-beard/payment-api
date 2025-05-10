@@ -22,7 +22,7 @@ namespace Payment.API.Features.User.Login
                     onSuccess: () => Results.Ok(result.Value),
                     onFailure: error => Results.BadRequest(error));
             })
-            .WithName("UserLogin")
+            .WithName("User Login")
             .Produces<LoginUserResponse>(StatusCodes.Status200OK)
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .WithSummary("UserLogin")

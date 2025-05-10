@@ -8,7 +8,6 @@ Este repositorio proporciona una plantilla para crear aplicaciones utilizando la
 - [Descripción general de la arquitectura](#descripción-general-de-la-arquitectura)
 - [Características](#características)
 - [Tecnologias Usadas](#tecnologias-usadas)
-<!-- - [Folder Structure](#folder-structure) -->
 
 ## Como Iniciar
 
@@ -32,6 +31,11 @@ siga estos sencillos pasos.
    ```sh
    docker compose up -d
    ```
+### Configuración servidor db
+
+Seguir las siguientes instrucciones
+
+- [Servidor db](https://github.com/king-beard/payment-api/blob/main/README.DB.md)
 
 ## Descripción general de la arquitectura
 
@@ -56,27 +60,3 @@ Esta plantilla sigue la arquitectura de corte vertical, que organiza el código 
 - **FluentValidation**
 - **EF Core**
 - **HealthChecks Library**
-
-<!-- ## Folder Structure
-
-- **/src**: Contains the main application code.
-  - **/Features**: Each feature is organized into its own folder, promoting encapsulation.
-    - **/Products**: Contains all product related files for the feature.
-       - **/CreateProduct**:  Logic for creating a product.
-       - **/DeleteProduct**: Logic for deleting a product.
-       - **/GetProductById**: Logic for retrieving a product by its Id.
-       - **/GetProducts**: Logic for retrieving a list of products.
-       - **/UpdateProduct**: Logic for updating product details.
-       - **ProductErrors**: Contains all product-related error handling.
-    - **FeatureXController.cs**: Entry point for HTTP requests related to the feature.
-  - **/Abstractions**: Contains shared interfaces and contracts.
-     - **/CQRS**: Contains all CQRS abstraction interfaces.
-     - **/Errors**: Define Error class.
-     - **/ResultResponse**: Standardized response structures for API results.
-  - **/Behaviors**: Contains middleware and behaviors that apply to requests and responses.
-  - **/Database**: Contains database-related code, including DB Context.
-  - **/Entities**: Defines the core data models used throughout the application.
-  - **/Exceptions**: Contains the global exception handler for the application.
-  - **/Extensions**: Contains extension methods for various classes and services.
-  - **/Migrations**: Database migration files for schema updates.
-  - **Program.cs**: Application entry point. -->

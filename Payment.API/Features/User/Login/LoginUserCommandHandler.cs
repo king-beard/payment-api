@@ -14,7 +14,7 @@ namespace Payment.API.Features.User.Login
         public async Task<Result<LoginUserCommandResult>> Handle(LoginUserCommand command,
          CancellationToken cancellationToken)
         {
-            var user = new Users() { Email = "chucho_herrera10@icloud.com", PasswordHash = "0419E351541CC869B35D025FF86C35A547AC5D2552434DC64B3E3E81005B98B6-AABCBD19043E4BAFB859CA05EFAA6F36" };
+            var user = new Users() { Email = configuration["UsersAPI:Email"], PasswordHash = configuration["UsersAPI:PasswordHash"] };
 
             bool verified = PasswordHasher.Verify(command.Password, user.PasswordHash);
 

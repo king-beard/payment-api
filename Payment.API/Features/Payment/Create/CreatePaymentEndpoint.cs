@@ -33,7 +33,7 @@ namespace Payment.API.Features.Payment.Create
                 var result = await sender.Send(command);
 
                 return result.Match(
-                    onSuccess: () => Results.Created($"api/products/{result.Value.Id}", result.Value),
+                    onSuccess: () => Results.Created($"api/payment/{result.Value.Id}", result.Value),
                     onFailure: error => Results.BadRequest(error));
             })
             .WithName("CreatePayment")
