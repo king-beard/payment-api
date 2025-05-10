@@ -5,8 +5,8 @@
 
 **2. Ingresar credenciales login**
 
-**Email:** pgadmin@codepruner.com
-**Contraseña:** pgadminP@ssw0rd!
+- **Email:** pgadmin@codepruner.com
+- **Contraseña:** pgadminP@ssw0rd!
 
 **3. Registrar Servidor.**
 
@@ -23,11 +23,11 @@ Pestaña General agregar nombre para el servidor en este caso : **PosgreSQLDocke
 
 Despues, Dar clic pestaña Conexión. Agregar la siguiente información
 
-**Nombre/Dirección de servidor:** postgresdb
-**Puerto:** 5432
-**Base de datos:** base_bank
-**Nombre de usuario:** postgres
-**Contraseña:** postgres_password
+- **Nombre/Dirección de servidor:** postgresdb
+- **Puerto:** 5432
+- **Base de datos:** base_bank
+- **Nombre de usuario:** postgres
+- **Contraseña:** postgres_password
 
 ![alt text](ImgREADMEDB/img3.png)
 
