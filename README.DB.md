@@ -1,7 +1,7 @@
 # servidor bd
 
 **1. Abrir siguiente link**
-- [PgAdmin](http://localhost:5050/login?next=/){target="_blank"}
+- [PgAdmin](http://localhost:5050/login?next=/)
 
 **2. Ingresar credenciales login**
 
@@ -46,7 +46,7 @@ Ahora dar un clic derecho en tablas y elegir la opción "Herramienta de consulta
 ![alt text](ImgREADMEDB/img5.png)
 
 Despues, abrir el siguiente link y copiar el contenido del script
-- [Scriptdb](https://github.com/king-beard/payment-api/blob/main/base_bank.sql){target="_blank"}
+- [Scriptdb](https://github.com/king-beard/payment-api/blob/main/base_bank.sql)
 
 A continuación, pegamos el contenido del script y ejecutamos el script. Dar clic en el simbolo de play o F5.
 

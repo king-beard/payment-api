@@ -15,7 +15,7 @@ siga estos sencillos pasos.
 
 ### Requisitos
 
-- [Docker Desktop](https://www.docker.com){target="_blank"}
+- [Docker Desktop](https://www.docker.com)
 
 ### Instalación
 
@@ -35,7 +35,7 @@ siga estos sencillos pasos.
 
 Seguir las siguientes instrucciones
 
-- [Servidor db](https://github.com/king-beard/payment-api/blob/main/README.DB.md){target="_blank"}
+- [Servidor db](https://github.com/king-beard/payment-api/blob/main/README.DB.md)
 
 ## Descripción general de la arquitectura
 
