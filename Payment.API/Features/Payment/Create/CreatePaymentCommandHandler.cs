@@ -1,8 +1,10 @@
 ﻿using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using Payment.API.Abstractions.CQRS;
 using Payment.API.Abstractions.ResultResponse;
 using Payment.API.Database;
 using Payment.API.Entities;
+using Payment.API.Features.Status;
 
 namespace Payment.API.Features.Payment.Create
 {
@@ -12,7 +14,7 @@ namespace Payment.API.Features.Payment.Create
     int ProductsNumber,
     Guid ClientId,
     Guid ShopId,
-    Guid StatusId
+    string StatusPrefix
     ) : ICommand<Result<CreatePaymentResult>>;
 
     public sealed record CreatePaymentResult(Guid Id);
@@ -25,10 +27,10 @@ namespace Payment.API.Features.Payment.Create
         {
             RuleFor(x => x.Concept)
                 .NotEmpty()
-                .WithMessage("Name is required!");
+                .WithMessage("Concept is required!");
             RuleFor(x => x.Amount)
                 .NotEmpty()
-                .WithMessage("Concept is required!");
+                .WithMessage("Amount is required!");
             RuleFor(x => x.ProductsNumber)
                 .NotEmpty()
                 .WithMessage("ProductsNumber is required!");
@@ -38,9 +40,10 @@ namespace Payment.API.Features.Payment.Create
             RuleFor(x => x.ShopId)
                .NotEmpty()
                .WithMessage("ShopId is required!");
-            RuleFor(x => x.StatusId)
+            RuleFor(x => x.StatusPrefix)
                .NotEmpty()
-               .WithMessage("StatusId is required!");
+               .WithMessage("StatusPrefix is required!")
+               .IsEnumName(typeof(StatusEnum));
         }
     }
 
@@ -50,6 +53,18 @@ namespace Payment.API.Features.Payment.Create
         public async Task<Result<CreatePaymentResult>> Handle(CreatePaymentCommand command,
          CancellationToken cancellationToken)
         {
+            Clients client = await dbContext.Client.FirstOrDefaultAsync(p => p.Id == command.ClientId, cancellationToken);
+            if (client is null)
+                return Result.Failure<CreatePaymentResult>(new("Client.NotFound", $"The client with Id '{command.ClientId}' was not found"));
+
+            Shops shop = await dbContext.Shop.FirstOrDefaultAsync(p => p.Id == command.ShopId, cancellationToken);
+            if (shop is null)
+                return Result.Failure<CreatePaymentResult>(new("Shop.NotFound", $"The shop with Id '{command.ShopId}' was not found"));
+
+            Statuss status = await dbContext.Status.FirstOrDefaultAsync(s => s.Prefix == command.StatusPrefix, cancellationToken);
+            if (status is null)
+                return Result.Failure<CreatePaymentResult>(new("Status.NotFound", $"The status '{command.StatusPrefix}' was not found"));
+
             var payment = new Payments
             {
                 Concept = command.Concept,
@@ -57,7 +72,7 @@ namespace Payment.API.Features.Payment.Create
                 ProductsNumber = command.ProductsNumber,
                 ClientId = command.ClientId,
                 ShopId = command.ShopId,
-                StatusId = command.StatusId
+                StatusId = status.Id
             };
 
             dbContext.Payment.Add(payment);

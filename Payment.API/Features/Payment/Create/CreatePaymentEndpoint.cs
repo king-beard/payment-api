@@ -12,7 +12,7 @@ namespace Payment.API.Features.Payment.Create
     int ProductsNumber,
     Guid ClientId,
     Guid ShopId,
-    Guid StatusId
+    string StatusPrefix
     );
     public sealed record CreatePaymentResponse(Guid Id);
 
@@ -28,7 +28,7 @@ namespace Payment.API.Features.Payment.Create
                     request.ProductsNumber,
                     request.ClientId,
                     request.ShopId,
-                    request.StatusId);
+                    request.StatusPrefix);
 
                 var result = await sender.Send(command);
 

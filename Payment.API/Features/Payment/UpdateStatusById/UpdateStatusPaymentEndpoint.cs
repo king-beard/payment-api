@@ -7,7 +7,7 @@ using Payment.API.Extensions;
 namespace Payment.API.Features.Payment.UpdateStatusById
 {
     public sealed record UpdateStatusPaymentRequest(
-    string Status
+    string StatusPrefix
     );
     public sealed record UpdateStatusPaymentResponse(Guid Id);
 
@@ -19,7 +19,7 @@ namespace Payment.API.Features.Payment.UpdateStatusById
             {
                 var command = new UpdateStatusPaymentCommand(
                     id,
-                    request.Status);
+                    request.StatusPrefix);
 
                 var result = await sender.Send(command);
 

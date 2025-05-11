@@ -7,7 +7,7 @@ using Payment.API.Extensions;
 namespace Payment.API.Features.Payment.GetStatusById
 {
 
-    public sealed record GetStatusPaymentByIdResponse(string status);
+    public sealed record GetStatusPaymentByIdResponse(string Status);
 
     public sealed class GetStatusPaymentByIdEndpoint : ICarterModule
     {

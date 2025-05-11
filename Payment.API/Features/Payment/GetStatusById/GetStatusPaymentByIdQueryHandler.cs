@@ -15,13 +15,11 @@ namespace Payment.API.Features.Payment.GetStatusById
         public async Task<Result<GetStatusPaymentByIdResult>> Handle(GetStatusPaymentByIdQuery query,
          CancellationToken cancellationToken)
         {
-            Payments payment = await dbContext.Payment.FirstOrDefaultAsync(p => p.Id == query.Id, cancellationToken: cancellationToken);
-
+            Payments payment = await dbContext.Payment.FirstOrDefaultAsync(p => p.Id == query.Id, cancellationToken);
             if (payment is null)
                 return Result.Failure<GetStatusPaymentByIdResult>(new("Payment.NotFound", $"The payment with Id '{query.Id}' was not found"));
 
-            Status status = await dbContext.Status.FirstOrDefaultAsync(s => s.Id == payment.StatusId, cancellationToken: cancellationToken);
-
+            Statuss status = await dbContext.Status.FirstOrDefaultAsync(s => s.Id == payment.StatusId, cancellationToken);
             if (status is null)
                 return Result.Failure<GetStatusPaymentByIdResult>(new("Status.NotFound", $"The status with Id '{payment.StatusId}' was not found"));
 

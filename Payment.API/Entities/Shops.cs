@@ -1,6 +1,6 @@
 ﻿namespace Payment.API.Entities
 {
-    public sealed class Shop : Audit
+    public sealed class Shops : Audit
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
