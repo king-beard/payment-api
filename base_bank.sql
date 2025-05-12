@@ -57,6 +57,6 @@ VALUES ('1a9a0374-2f42-4872-846d-6513003726ca', 'Wendy', 'Herrera');
 
 -- insert shop
 INSERT INTO public.shop(id, name, type)
-VALUES ('3db493dd-b7e8-4474-bac6-fa56614eb8c2', 'Samsung' ,'tecnologia');
+VALUES ('3db493dd-b7e8-4474-bac6-fa56614eb8c2', 'Samsung' ,'negocio');
 INSERT INTO public.shop(id, name, type)
-VALUES ('633ad6b0-81e2-4d36-8e18-369d49e9be7f', 'Apple' ,'tecnologia');
+VALUES ('633ad6b0-81e2-4d36-8e18-369d49e9be7f', 'Papeleria la esquinita' ,'otro');

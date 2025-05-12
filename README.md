@@ -37,6 +37,12 @@ Seguir las siguientes instrucciones
 
 - [Servidor db](https://github.com/king-beard/payment-api/blob/main/README.DB.md)
 
+### Colección postman
+
+Link descarga colección de postman
+
+- [Collection Postman](https://github.com/king-beard/payment-api/blob/main/README.DB.md)
+
 ## Descripción general de la arquitectura
 
 Esta plantilla sigue la arquitectura de corte vertical, que organiza el código por características en lugar de por cuestiones técnicas. Cada característica es independiente, lo que promueve una alta cohesión y un bajo acoplamiento.

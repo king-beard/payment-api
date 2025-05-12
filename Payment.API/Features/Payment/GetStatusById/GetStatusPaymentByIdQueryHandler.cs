@@ -7,7 +7,7 @@ using Payment.API.Entities;
 namespace Payment.API.Features.Payment.GetStatusById
 {
     public sealed record GetStatusPaymentByIdQuery(Guid Id) : IQuery<Result<GetStatusPaymentByIdResult>>;
-    public sealed record GetStatusPaymentByIdResult(string Status);
+    public sealed record GetStatusPaymentByIdResult(string Status, decimal Amount, DateTime Created);
 
     public class GetStatusPaymentByIdQueryHandler(ApplicationDbContext dbContext)
    : IQueryHandler<GetStatusPaymentByIdQuery, Result<GetStatusPaymentByIdResult>>
@@ -23,7 +23,7 @@ namespace Payment.API.Features.Payment.GetStatusById
             if (status is null)
                 return Result.Failure<GetStatusPaymentByIdResult>(new("Status.NotFound", $"The status with Id '{payment.StatusId}' was not found"));
 
-            return new GetStatusPaymentByIdResult(status.Description);
+            return new GetStatusPaymentByIdResult(status.Description, payment.Amount, payment.Created);
         }
     }
 }
