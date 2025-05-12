@@ -41,7 +41,7 @@ Seguir las siguientes instrucciones
 
 Link descarga colección de postman
 
-- [Collection Postman](https://github.com/king-beard/payment-api/blob/main/README.DB.md)
+- [Collection Postman](https://drive.google.com/file/d/1ewwMbORLkYZ8mPHtMw0VOnxz9rQ9maUh/view?usp=drive_link)
 
 ## Descripción general de la arquitectura
 
