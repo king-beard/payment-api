@@ -23,7 +23,7 @@ namespace Payment.API.Features.Payment.GetStatusById
                     onFailure: error => Results.BadRequest(error));
             })
             .WithName("GetStatusPaymentById")
-            .Produces<GetStatusPaymentByIdResponse>(StatusCodes.Status200OK)
+            .Produces<GetStatusPaymentByIdResponse>()
             .ProducesProblem(StatusCodes.Status400BadRequest)
             .WithSummary("Get Status Payment By Id")
             .WithDescription("Get Status Payment By Id");

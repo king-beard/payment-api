@@ -12,7 +12,7 @@ namespace Payment.API.Extensions
             {
                 config.RegisterServicesFromAssembly(assembly);
                 config.AddOpenBehavior(typeof(ValidationBehavior<,>));
-                //config.AddOpenBehavior(typeof(LoggingBehavior<,>));
+                config.AddOpenBehavior(typeof(LoggingBehavior<,>));
             });
 
             return services;

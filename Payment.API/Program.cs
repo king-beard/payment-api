@@ -32,13 +32,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerWithUi();
 }
 
+//custom
 // app.ApplyMigrations();
+app.UseHealthChecks();
+
+// libraries
+app.MapCarter();
 
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.UseHttpsRedirection();
-app.UseHealthChecks();
-app.MapCarter();
 
 app.Run();

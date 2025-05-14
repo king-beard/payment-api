@@ -1,19 +1,26 @@
 services:
-  webapi:
-    image: webapi
+  payment_api:
+    container_name: payment_api
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - "5000:80"
-    environment:
-      - ASPNETCORE_CONNECTION_STRING=Host=postgresdb;Port=5432;Database=base_bank;Username=postgres;Password=postgres_password
     depends_on:
-      - postgresdb
-    restart: 
+      - postgres_db
+    environment:
+      - ASPNETCORE_CONNECTION_STRING=Host=postgres_db;Port=5432;Database=base_bank;Username=postgres;Password=postgres_password
+      - ASPNETCORE_HTTP_PORTS=80
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=C0nnect+1
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+    ports:
+      - "5083:80"
+      - "7052:443"
+    volumes:
+      - ~/.aspnet/https:/https:ro
+    restart:
       always
 
-  postgresdb:
+  postgres_db:
     image: postgres
     container_name: postgres
     environment:
@@ -22,16 +29,24 @@ services:
       POSTGRES_DB: base_bank
     ports:
       - "5432:5432"
+    restart:
+      always
     volumes:
       - pgdata:/var/lib/postgresql/data
 
   pgadmin:
     image: "dpage/pgadmin4"
-    ports:
-      - "5050:80"
+    container_name: pgadmin
     environment:
       PGADMIN_DEFAULT_EMAIL: "pgadmin@codepruner.com"
       PGADMIN_DEFAULT_PASSWORD: "pgadminP@ssw0rd!"
+    ports:
+      - "5050:80"
+    restart:
+      always
+    volumes:
+      - pgadmin:/var/lib/pgadmin
 
 volumes:
   pgdata:
+  pgadmin:

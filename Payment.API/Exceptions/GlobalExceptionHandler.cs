@@ -16,7 +16,7 @@ namespace Payment.API.Exceptions
             var problemDetails = new ProblemDetails
             {
                 Status = StatusCodes.Status500InternalServerError,
-                Type = "https://datatracker.ietf.org/doc/html/rfc3986#section-6.6.1",
+                Type = "",
                 Title = "Server Error"
             };
 

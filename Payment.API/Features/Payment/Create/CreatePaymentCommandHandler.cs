@@ -1,10 +1,8 @@
-﻿using FluentValidation;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Payment.API.Abstractions.CQRS;
 using Payment.API.Abstractions.ResultResponse;
 using Payment.API.Database;
 using Payment.API.Entities;
-using Payment.API.Features.Status;
 
 namespace Payment.API.Features.Payment.Create
 {
@@ -18,35 +16,7 @@ namespace Payment.API.Features.Payment.Create
     ) : ICommand<Result<CreatePaymentResult>>;
 
     public sealed record CreatePaymentResult(Guid Id);
-
-
-    public sealed class CreateProductCommandValidator
-    : AbstractValidator<CreatePaymentCommand>
-    {
-        public CreateProductCommandValidator()
-        {
-            RuleFor(x => x.Concept)
-                .NotEmpty()
-                .WithMessage("Concept is required!");
-            RuleFor(x => x.Amount)
-                .NotEmpty()
-                .WithMessage("Amount is required!");
-            RuleFor(x => x.ProductsNumber)
-                .NotEmpty()
-                .WithMessage("ProductsNumber is required!");
-            RuleFor(x => x.ClientId)
-                .NotEmpty()
-                .WithMessage("ClientId is required!");
-            RuleFor(x => x.ShopId)
-               .NotEmpty()
-               .WithMessage("ShopId is required!");
-            RuleFor(x => x.StatusPrefix)
-               .NotEmpty()
-               .WithMessage("StatusPrefix is required!")
-               .IsEnumName(typeof(StatusEnum));
-        }
-    }
-
+    
     public class CreatePaymentCommandHandler(ApplicationDbContext dbContext)
    : ICommandHandler<CreatePaymentCommand, Result<CreatePaymentResult>>
     {

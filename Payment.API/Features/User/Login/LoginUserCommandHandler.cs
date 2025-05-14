@@ -15,13 +15,13 @@ namespace Payment.API.Features.User.Login
          CancellationToken cancellationToken)
         {
             var user = new Users() { Email = configuration["UsersAPI:Email"], PasswordHash = configuration["UsersAPI:PasswordHash"] };
-
+            
+            if (user.Email != command.Email)
+                return Result.Failure<LoginUserCommandResult>(new("User", "Email doesn't match"));
+            
             bool verified = PasswordHasher.Verify(command.Password, user.PasswordHash);
-
             if (!verified)
-            {
                 return Result.Failure<LoginUserCommandResult>(new("User not found!", ""));
-            }
 
             string token = TokenProvider.Create(user, configuration);
 

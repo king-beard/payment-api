@@ -30,5 +30,8 @@
 **/values.dev.yaml
 LICENSE
 README.md
+
+# custom ignore
 README.DB.md
-ImgREADMEDB
+Img
+.idea

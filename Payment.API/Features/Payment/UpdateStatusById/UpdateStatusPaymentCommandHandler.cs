@@ -14,19 +14,7 @@ namespace Payment.API.Features.Payment.UpdateStatusById
     ) : ICommand<Result<UpdateStatusPaymentResult>>;
 
     public sealed record UpdateStatusPaymentResult(bool IsSuccess);
-
-    public sealed class UpdateStatusCommandValidator
-    : AbstractValidator<UpdateStatusPaymentCommand>
-    {
-        public UpdateStatusCommandValidator()
-        {
-            RuleFor(x => x.StatusPrefix)
-               .NotEmpty()
-               .WithMessage("StatusPrefix is required!")
-               .IsEnumName(typeof(StatusEnum));
-        }
-    }
-
+    
     public class UpdateStatusPaymentCommandHandler(ApplicationDbContext dbContext)
    : ICommandHandler<UpdateStatusPaymentCommand, Result<UpdateStatusPaymentResult>>
     {
